@@ -10,7 +10,9 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityListener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import me.rymate.moardamage.MoarDamage;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class Listener_Entity extends EntityListener {
 
@@ -22,18 +24,23 @@ public class Listener_Entity extends EntityListener {
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if(!(event instanceof EntityDamageByEntityEvent)) return;
-        EntityDamageByEntityEvent subevent = event (EntityDamageByEntityEvent)event;
-        if(event.getEntity instanceof Player && subevent.getDamager() instanceof Monster) onEntityVsPlayer(subevent);
-        if(subevent.getDamager instanceof Player && event.getEntity() instanceof Monster) onEntityVsPlayer(subevent);
+        if (!(event instanceof EntityDamageByEntityEvent)) {
+            return;
+        }
+        EntityDamageByEntityEvent subevent = (EntityDamageByEntityEvent) event;
+        if (event.getEntity() instanceof Player && subevent.getDamager() instanceof Monster) {
+            onEntityVsPlayer(subevent);
+        }
+        if (subevent.getDamager() instanceof Player && event.getEntity() instanceof Monster) {
+            onEntityVsPlayer(subevent);
+        }
     }
-    
+
     private void onEntityVsPlayer(EntityDamageByEntityEvent event) {
         //TODO Do stuff
     }
-    
+
     private void onPlayerVsEntity(EntityDamageByEntityEvent event) {
         //TODO Do stuff
     }
-    
 }

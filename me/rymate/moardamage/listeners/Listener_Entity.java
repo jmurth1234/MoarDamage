@@ -30,8 +30,7 @@ public class Listener_Entity extends EntityListener {
         EntityDamageByEntityEvent subevent = (EntityDamageByEntityEvent) event;
         if (event.getEntity() instanceof Player && subevent.getDamager() instanceof Monster) {
             onEntityVsPlayer(subevent);
-        }
-        if (subevent.getDamager() instanceof Player && event.getEntity() instanceof Monster) {
+        } else if (subevent.getDamager() instanceof Player && event.getEntity() instanceof Monster) {
             onEntityVsPlayer(subevent);
         }
     }

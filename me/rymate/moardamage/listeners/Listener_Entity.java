@@ -22,10 +22,18 @@ public class Listener_Entity extends EntityListener {
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        DamageCause damagetype = event.getCause().ENTITY_ATTACK;
-        int eventDamage = event.getDamage();
-        if (event.getCause().equals(damagetype)) {
-            event.setDamage((eventDamage * plugin.getConfig_moardamage_damagemultiplyer()));
-        }
+        if(!(event instanceof EntityDamageByEntityEvent)) return;
+        EntityDamageByEntityEvent subevent = event (EntityDamageByEntityEvent)event;
+        if(event.getEntity instanceof Player && subevent.getDamager() instanceof Monster) onEntityVsPlayer(subevent);
+        if(subevent.getDamager instanceof Player && event.getEntity() instanceof Monster) onEntityVsPlayer(subevent);
     }
+    
+    private void onEntityVsPlayer(EntityDamageByEntityEvent event) {
+        //TODO Do stuff
+    }
+    
+    private void onPlayerVsEntity(EntityDamageByEntityEvent event) {
+        //TODO Do stuff
+    }
+    
 }

@@ -36,7 +36,8 @@ public class Listener_Entity extends EntityListener {
     }
 
     private void onEntityVsPlayer(EntityDamageByEntityEvent event) {
-        //TODO Do stuff
+        int damage = event.getDamage();
+        event.setDamage(damage*plugin.getConfig_moardamage_damagemultiplyer());
     }
 
     private void onPlayerVsEntity(EntityDamageByEntityEvent event) {
